@@ -17,7 +17,7 @@ This Arduino sketch connects a **PS5 DualSense controller** to an **ESP32 DevKit
 
 - **Arduino IDE**
 - **ESP32 DevKitC**
-- Library: [`ps5-esp32`](https://github.com/Narruxa/ps5-esp32)
+- Library: [`ps5-esp32`](https://github.com/rodneybakiskan/ps5-esp32)
 
 Install the library by downloading it from GitHub and placing it in your `Arduino/libraries` directory.
 
