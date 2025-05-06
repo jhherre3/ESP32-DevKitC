@@ -6,9 +6,9 @@ This project is a **Wi-Fi-enabled soil moisture logger** built with an ESP32, ca
 
 ## ✅ Version 1 – Working Prototype
 
-> Below is an image of the working **SoilMoistureMonitor V1** prototype using an ESP32 and analog soil probe.
+> Below is a photo of the **SoilMoistureMonitor V1** prototype using an ESP32 and analog soil probe.
 
-![SoilMoistureMonitor V1](/Files/SoilMoistureProbeV1.png)
+![SoilMoistureMonitor V1](./Projects/WebSoilMonitorV1/Files/SoilMoistureProbeV1.png)
 
 ---
 
@@ -67,15 +67,21 @@ You may need to recalibrate `dryBaseline` and `wetValue` based on your specific 
 
 ---
 
+## 🛠 Future Improvements
+
+- Add timestamp logging (RTC or NTP sync).
+- Enable remote access or cloud integration (e.g., ThingSpeak, Firebase).
+- Add battery voltage monitoring for off-grid systems.
+- Use SPIFFS or SD card to store longer logs.
+
+---
+
 ### 🔮 Planned Features for V2
 
-![SoilMoistureMonitor V1](/Files/SoilMoistureProbeV1.png)
-
-- 📱 **Mobile-Friendly Interface:** Add touch-friendly graphs and UI elements for phones and tablets.
-- 📊 **Chart View:** Real-time and historical data plotted using embedded JavaScript (e.g., Chart.js).
-- 🔔 **Threshold Alerts:** Send Wi-Fi push alerts or email when moisture falls below a set threshold.
-- 🔋 **Battery Status Bar:** Show battery % and charging state visually on the webpage.
-- 🌡 **Multiple Sensor Support:** Interface with more than one soil probe (multi-zone monitoring).
-- 🧠 **Smart Watering (Optional):** Activate a relay for a water pump if moisture drops below target.
-- 🌐 **Offline Mode:** Store logs locally and upload when Wi-Fi is available.
-- 🔧 **Wi-Fi Config Page:** Access a web-based setup portal to update Wi-Fi credentials without code flashing.
+- 📱 **Mobile-Friendly Interface:** Responsive layout with touch support.
+- 📊 **Chart View:** Visualize moisture data trends using Chart.js or similar.
+- 🔔 **Alert System:** Send email or local alerts if soil gets too dry.
+- 🧠 **Smart Actions:** Optional relay-based auto-watering based on readings.
+- 🔋 **Battery Status Indicator:** Show battery level on the webpage.
+- 🌐 **Offline/Cache Mode:** Store and sync data when connection returns.
+- 📶 **Wi-Fi Setup Portal:** Configure Wi-Fi from a browser (no re-flash needed).
