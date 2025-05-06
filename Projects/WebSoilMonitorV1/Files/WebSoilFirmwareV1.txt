@@ -1,0 +1,139 @@
+#include <WiFi.h>
+
+#define SOIL_PIN 34
+
+// Wi-Fi credentials
+const char* ssid = "SSID";
+const char* password = "Password";
+
+WiFiServer server(80);
+
+// Calibrated sensor values
+const int dryBaseline = 2695;
+const int wetValue = 1325;
+
+// Log buffer (1 log every 5 mins, 12 logs = 1 hour)
+#define LOG_SIZE 12
+int logBuffer[LOG_SIZE];
+int logIndex = 0;
+unsigned long logCount = 0;
+
+// Timer
+unsigned long lastReadTime = 0;
+unsigned long lastLogTime = 0;
+
+// Last measured moisture
+int currentMoisture = 0;
+
+void setup() {
+  Serial.begin(115200);
+  analogReadResolution(12);
+  delay(1000);
+
+  Serial.println("Connecting to WiFi...");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("\n✅ Connected to WiFi");
+  Serial.print("🌐 IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  server.begin();
+
+  // === Initial Reading ===
+  int raw = analogRead(SOIL_PIN);
+  currentMoisture = constrain(map(raw, dryBaseline, wetValue, 0, 100), 0, 100);
+
+  // Fill log buffer with this first value
+  for (int i = 0; i < LOG_SIZE; i++) {
+    logBuffer[i] = currentMoisture;
+    logCount++;
+  }
+
+  Serial.print("📘 Log initialized with first moisture reading: ");
+  Serial.print(currentMoisture);
+  Serial.println("%");
+}
+
+void loop() {
+  unsigned long now = millis();
+
+  // Every 1 second: Read and update current moisture
+  if (now - lastReadTime >= 1000) {
+    lastReadTime = now;
+
+    int raw = analogRead(SOIL_PIN);
+    currentMoisture = constrain(map(raw, dryBaseline, wetValue, 0, 100), 0, 100);
+
+    Serial.print("Raw: ");
+    Serial.print(raw);
+    Serial.print(" | Moisture: ");
+    Serial.print(currentMoisture);
+    Serial.println("%");
+  }
+
+  // Every 5 minutes: Save moisture to log
+  if (now - lastLogTime >= 300000) {
+    lastLogTime = now;
+
+    logBuffer[logIndex] = currentMoisture;
+    logIndex = (logIndex + 1) % LOG_SIZE;
+    logCount++;
+
+    Serial.print("📘 Logged 5-min reading #");
+    Serial.print(logCount);
+    Serial.print(": ");
+    Serial.print(currentMoisture);
+    Serial.println("%");
+  }
+
+  // Serve webpage
+  WiFiClient client = server.available();
+  if (client) {
+    Serial.println("Client connected.");
+    while (client.connected() && !client.available()) {
+      delay(1);
+    }
+    while (client.available()) {
+      client.read();
+    }
+
+    // Build HTML response
+    client.println("HTTP/1.1 200 OK");
+    client.println("Content-Type: text/html");
+    client.println("Connection: close");
+    client.println();
+    client.println("<!DOCTYPE html><html><head>");
+    client.println("<meta charset='UTF-8'>");
+    client.println("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
+    client.println("<meta http-equiv='refresh' content='5'>");
+    client.println("<title>Soil Moisture Monitor</title></head><body>");
+    client.println("<h1>🌱 Soil Moisture Monitor</h1>");
+    client.print("<h2>Current Moisture: ");
+    client.print(currentMoisture);
+    client.println("%</h2>");
+
+    // Show log
+    client.println("<h3>📊 Moisture Log (Last Hour, 5-min intervals)</h3><ul>");
+    for (int i = 0; i < LOG_SIZE; i++) {
+      int idx = (logIndex + i) % LOG_SIZE;
+      long entryNumber = logCount - LOG_SIZE + i + 1;
+      if (logBuffer[idx] >= 0 && entryNumber > 0) {
+        client.print("<li>Log ");
+        client.print(entryNumber);
+        client.print(": ");
+        client.print(logBuffer[idx]);
+        client.println("%</li>");
+      }
+    }
+    client.println("</ul>");
+    client.println("<p>Page refreshes every 5 seconds.</p>");
+    client.println("</body></html>");
+
+    client.stop();
+    Serial.println("Client disconnected.");
+  }
+}
