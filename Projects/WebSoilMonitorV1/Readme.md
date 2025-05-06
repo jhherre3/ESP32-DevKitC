@@ -8,7 +8,7 @@ This project is a **Wi-Fi-enabled soil moisture logger** built with an ESP32, ca
 
 > Below is a photo of the **SoilMoistureMonitor V1** prototype using an ESP32 and analog soil probe.
 
-![SoilMoistureMonitor V1](./Files/SoilMoistureProbeV1.png)
+![SoilMoistureMonitor Prototype](./Files/espsoilmoist.jpg)
 
 ---
 
@@ -78,7 +78,7 @@ You may need to recalibrate `dryBaseline` and `wetValue` based on your specific 
 
 ### 🔮 Planned Features for V2
 
-![SoilMoistureMonitor V1](./Files/SoilMoistureProbeV1.png)
+![SoilMoistureMonitor V2](./Files/SoilMoistureProbeV1.png)
 
 - 📱 **Mobile-Friendly Interface:** Responsive layout with touch support.
 - 📊 **Chart View:** Visualize moisture data trends using Chart.js or similar.
