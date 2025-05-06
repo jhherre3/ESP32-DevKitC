@@ -78,6 +78,8 @@ You may need to recalibrate `dryBaseline` and `wetValue` based on your specific 
 
 ### 🔮 Planned Features for V2
 
+![SoilMoistureMonitor V1](./Files/SoilMoistureProbeV1.png)
+
 - 📱 **Mobile-Friendly Interface:** Responsive layout with touch support.
 - 📊 **Chart View:** Visualize moisture data trends using Chart.js or similar.
 - 🔔 **Alert System:** Send email or local alerts if soil gets too dry.
