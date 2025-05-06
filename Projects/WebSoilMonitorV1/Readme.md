@@ -8,7 +8,7 @@ This project is a **Wi-Fi-enabled soil moisture logger** built with an ESP32, ca
 
 > Below is a photo of the **SoilMoistureMonitor V1** prototype using an ESP32 and analog soil probe.
 
-![SoilMoistureMonitor V1](./Projects/WebSoilMonitorV1/Files/SoilMoistureProbeV1.png)
+![SoilMoistureMonitor V1](./Files/SoilMoistureProbeV1.png)
 
 ---
 
