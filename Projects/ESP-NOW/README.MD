@@ -179,10 +179,5 @@ void loop() {
 - 📦 Send **custom structs/data packets**
 - 🌐 Combine with Wi-Fi or web interface
 
----
 
-## 🧠 Credit
-
-Demo created by **[Your Name]**  
-Built using Arduino + ESP32 + ESP-NOW 📡
 
