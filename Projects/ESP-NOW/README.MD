@@ -1,5 +1,11 @@
 # 📡 ESP-NOW Hello World — Two ESP32 Demo
 
+
+![ESP-NOW Demo](https://github.com/jhherre3/ESP32-DevKitC/blob/main/Files/espnowtest1.png)
+
+> Image showing two ESP32 boards connected via USB and communicating via ESP-NOW.
+
+
 This project demonstrates a simple "Hello World" communication between two ESP32 boards using [ESP-NOW](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html), a fast and connectionless peer-to-peer wireless protocol developed by Espressif.
 
 ---
