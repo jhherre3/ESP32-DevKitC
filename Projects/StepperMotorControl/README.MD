@@ -108,6 +108,6 @@ void loop() {
 ## Photos
 
 
-![Stepper Motor Test Setup](Projects/StepperMotorControl/stepper.jpg)
+![Stepper Motor Test Setup](https://github.com/jhherre3/ESP32-DevKitC/blob/main/Projects/StepperMotorControl/stepper.jpg)
  
 
