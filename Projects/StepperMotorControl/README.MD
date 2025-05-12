@@ -108,5 +108,6 @@ void loop() {
 ## Photos
 
 
-![Setup Top View](/stepper.jpg)  
+![Stepper Motor Test Setup](Projects/StepperMotorControl/stepper.jpg)
+ 
 
